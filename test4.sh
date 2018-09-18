@@ -21,6 +21,16 @@ CONF_FILE7=xuez7.conf
 CONF_FILE8=xuez8.conf
 CONF_FILE9=xuez9.conf
 CONF_FILE10=xuez10.conf
+WALL_DIR=/root/xuez\/
+WALL_DIR2=/root/xuez2\/
+WALL_DIR3=/root/xuez3\/
+WALL_DIR4=/root/xuez4\/
+WALL_DIR5=/root/xuez5\/
+WALL_DIR6=/root/xuez6\/
+WALL_DIR7=/root/xuez7\/
+WALL_DIR8=/root/xuez8\/
+WALL_DIR9=/root/xuez9\/
+WALL_DIR10=/root/xuez10\/
 PORT=41798
 
 echo ""
@@ -79,26 +89,26 @@ echo ""
 echo "Removing old files..."
 sudo killall xuezd
 sudo rm xuezd  && rm xuez-cli && rm xuez-tx
-sudo rm -rf /root/.xuez
-sudo rm -rf /root/.xuez2
-sudo rm -rf /root/.xuez3
-sudo rm -rf /root/.xuez4
-sudo rm -rf /root/.xuez5
-sudo rm -rf /root/.xuez6
-sudo rm -rf /root/.xuez7
-sudo rm -rf /root/.xuez8
-sudo rm -rf /root/.xuez9
-sudo rm -rf /root/.xuez10
+sudo rm -rf /root/.xuez && sudo rm -rf /root/xuez
+sudo rm -rf /root/.xuez2 && sudo rm -rf /root/xuez2
+sudo rm -rf /root/.xuez3 && sudo rm -rf /root/xuez3
+sudo rm -rf /root/.xuez4 && sudo rm -rf /root/xuez4
+sudo rm -rf /root/.xuez5 && sudo rm -rf /root/xuez5
+sudo rm -rf /root/.xuez6 && sudo rm -rf /root/xuez6
+sudo rm -rf /root/.xuez7 && sudo rm -rf /root/xuez7
+sudo rm -rf /root/.xuez8 && sudo rm -rf /root/xuez8
+sudo rm -rf /root/.xuez9 && sudo rm -rf /root/xuez9
+sudo rm -rf /root/.xuez10 && sudo rm -rf /root/xuez10
 echo "Done..."
 echo ""
 
 	echo "Do you want to install several masternodes?"
 	echo "If so, enter  the amount of masternodes you would like to install followed by [ENTER]: "
-    read $number
-    echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
-    echo ""
+   	read $number
+   	echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
+   	echo ""
 
-    sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list"
+    	sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list"
 	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
 	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
 	sudo apt-get update
@@ -122,14 +132,21 @@ echo ""
 	sudo ufw logging on
 	sudo ufw allow 22
 	sudo ufw allow 41798
-    sudo ufw allow 9051
-    sudo ufw allow 9033
+   	sudo ufw allow 9051
+    	sudo ufw allow 9033
 	echo "y" | sudo ufw enable
 	sudo ufw status
 	
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
-rm xuez-linux-cli-10110.tgz	
+rm xuez-linux-cli-10110.tgz
+cp /root/xuezd /root/xuez/xuezd
+cp /root/xuez-cli /root/xuez/xuez-cli
+cp /root/xuez-tx /root/xuez/xuez-tx
+sudo chmod +x /root/xuez3/xuezd
+sudo chmod +x /root/xuez3/xuez-cli
+sudo chmod +x /root/xuez3/xuez-tx
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 mkdir $CONF_DIR								
 sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE"
 echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR/$CONF_FILE
@@ -146,7 +163,7 @@ sudo hostname -I
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR/$CONF_FILE
 	echo "rpcallowip=127.0.0.1" >> $CONF_DIR/$CONF_FILE
-    echo "rpcport=41799" >> $CONF_DIR/$CONF_FILE
+    	echo "rpcport=41799" >> $CONF_DIR/$CONF_FILE
 	echo "listen=1" >> $CONF_DIR/$CONF_FILE
 	echo "listenonion=1" >> $CONF_DIR/$CONF_FILE
 	echo "server=1" >> $CONF_DIR/$CONF_FILE
@@ -159,9 +176,10 @@ sudo hostname -I
 	echo "port=$PORT" >> $CONF_DIR/$CONF_FILE
 	echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR/$CONF_FILE
 	echo "masternodeprivkey=$PRIVKEY" >> $CONF_DIR/$CONF_FILE
-	./xuezd -daemon
-	sudo su -c "echo 'listenonion=1' >> /.xuez/xuez.conf"
-	echo "if server start failure try ./xuezd -reindex"
+	/root/xuez/xuezd -daemon -datadir=/root/.xuez
+	sleep 20
+	sudo su -c "echo 'listenonion=1' >> /root/.xuez/xuez.conf"
+	echo "if server start failure try /root/xuez/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
 	echo "! Your MasterNode Is setup please close terminal  !"
@@ -177,8 +195,15 @@ if [ $number = 1 ]
 	exit 0
 	else
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
-tar -xvzf xuez-linux-cli-10110.tgz								
-rm xuez-linux-cli-10110.tgz									
+tar -xvzf xuez-linux-cli-10110.tgz							
+rm xuez-linux-cli-10110.tgz
+cp /root/xuezd /root/xuez2/xuezd
+cp /root/xuez-cli /root/xuez2/xuez-cli
+cp /root/xuez-tx /root/xuez2/xuez-tx
+sudo chmod +x /root/xuez3/xuezd
+sudo chmod +x /root/xuez3/xuez-cli
+sudo chmod +x /root/xuez3/xuez-tx
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2"
 echo "" >> $CONF_DIR2/$CONF_FILE2 && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2
 
@@ -194,7 +219,7 @@ sudo hostname -I
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR2/$CONF_FILE2
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR2/$CONF_FILE2
 	echo "rpcallowip=127.0.0.1" >> $CONF_DIR2/$CONF_FILE2
-    echo "rpcport=417800" >> $CONF_DIR2/$CONF_FILE2
+    	echo "rpcport=417800" >> $CONF_DIR2/$CONF_FILE2
 	echo "listen=1" >> $CONF_DIR2/$CONF_FILE2
 	echo "listenonion=1" >> $CONF_DIR2/$CONF_FILE2
 	echo "server=1" >> $CONF_DIR2/$CONF_FILE2
@@ -207,9 +232,10 @@ sudo hostname -I
 	echo "port=$PORT" >> $CONF_DIR2/$CONF_FILE2
 	echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR2/$CONF_FILE2
 	echo "masternodeprivkey=$PRIVKEY2" >> $CONF_DIR2/$CONF_FILE2
-	.xuez2/xuezd -daemon -datadir=/root/.xuez2
-	sudo su -c "echo 'listenonion=1' >> /.xuez2/xuez2.conf"
-	echo "if server start failure try .xuez2/xuezd -reindex"
+	/root/xuez2/xuezd -daemon -datadir=/root/.xuez2
+	sleep 20
+	sudo su -c "echo 'listenonion=1' >> /root/.xuez2/xuez2.conf"
+	echo "if server start failure try /root/xuez2/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
 	echo "! Your MasterNode Is setup please close terminal  !"
@@ -226,9 +252,16 @@ if [ $number = 2 ]
 	else
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
-rm xuez-linux-cli-10110.tgz									
-sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2"
-echo "" >> $CONF_DIR2/$CONF_FILE2 && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2
+rm xuez-linux-cli-10110.tgz	
+cp /root/xuezd /root/xuez3/xuezd
+cp /root/xuez-cli /root/xuez3/xuez-cli
+cp /root/xuez-tx /root/xuez3/xuez-tx
+sudo chmod +x /root/xuez3/xuezd
+sudo chmod +x /root/xuez3/xuez-cli
+sudo chmod +x /root/xuez3/xuez-tx
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
+sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR3/$CONF_FILE3"
+echo "" >> $CONF_DIR3/$CONF_FILE3 && echo "listenonion=1"  >> $CONF_DIR3/$CONF_FILE3
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -242,7 +275,7 @@ sudo hostname -I
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR3/$CONF_FILE3
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> $CONF_DIR3/$CONF_FILE3
 	echo "rpcallowip=127.0.0.1" >> $CONF_DIR3/$CONF_FILE3
-    echo "rpcport=417800" >> $CONF_DIR3/$CONF_FILE3
+    	echo "rpcport=417801" >> $CONF_DIR3/$CONF_FILE3
 	echo "listen=1" >> $CONF_DIR3/$CONF_FILE3
 	echo "listenonion=1" >> $CONF_DIR3/$CONF_FILE3
 	echo "server=1" >> $CONF_DIR3/$CONF_FILE3
@@ -255,9 +288,10 @@ sudo hostname -I
 	echo "port=$PORT" >> $CONF_DIR3/$CONF_FILE3
 	echo "masternodeaddr=$IP:$PORT" >> $CONF_DIR3/$CONF_FILE3
 	echo "masternodeprivkey=$PRIVKEY3" >> $CONF_DIR3/$CONF_FILE3
-	.xuez2/xuezd -daemon -datadir=/root/.xuez3
-	sudo su -c "echo 'listenonion=1' >> /.xuez3/xuez3.conf"
-	echo "if server start failure try .xuez3/xuezd -reindex"
+	/root/xuez3/xuezd -daemon -datadir=/root/.xuez3
+	sleep 20
+	sudo su -c "echo 'listenonion=1' >> /root/.xuez3/xuez3.conf"
+	echo "if server start failure try /root/xuez3/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
 	echo "! Your MasterNode Is setup please close terminal  !"
