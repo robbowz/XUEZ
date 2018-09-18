@@ -184,12 +184,10 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "! Your MasterNode Is setup please close terminal  !"
-	echo "!   and continue the local wallet setup guide     !"
+	echo "!        Your first MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
-fi
-}
 
 {
 if [ $number = 1 ]
@@ -242,8 +240,8 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez2/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "! Your MasterNode Is setup please close terminal  !"
-	echo "!   and continue the local wallet setup guide     !"
+	echo "!        Your second MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
 fi
@@ -300,10 +298,11 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez3/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "! Your MasterNode Is setup please close terminal  !"
-	echo "!   and continue the local wallet setup guide     !"
+	echo "!         Your last MasterNode Is setup		!"
+	echo "!      continue the local wallet setup guide      !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
+
 fi
 }
 
