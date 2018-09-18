@@ -140,12 +140,14 @@ echo ""
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
 rm xuez-linux-cli-10110.tgz
+mkdir /root/xuez/
+mkdir /root/.xuez/
 cp /root/xuezd /root/xuez/xuezd
 cp /root/xuez-cli /root/xuez/xuez-cli
 cp /root/xuez-tx /root/xuez/xuez-tx
-sudo chmod +x /root/xuez3/xuezd
-sudo chmod +x /root/xuez3/xuez-cli
-sudo chmod +x /root/xuez3/xuez-tx
+sudo chmod +x /root/xuez/xuezd
+sudo chmod +x /root/xuez/xuez-cli
+sudo chmod +x /root/xuez/xuez-tx
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 mkdir $CONF_DIR								
 sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE"
@@ -197,12 +199,14 @@ if [ $number = 1 ]
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz							
 rm xuez-linux-cli-10110.tgz
+mkdir /root/xuez2/
+mkdir /root/.xuez2/
 cp /root/xuezd /root/xuez2/xuezd
 cp /root/xuez-cli /root/xuez2/xuez-cli
 cp /root/xuez-tx /root/xuez2/xuez-tx
-sudo chmod +x /root/xuez3/xuezd
-sudo chmod +x /root/xuez3/xuez-cli
-sudo chmod +x /root/xuez3/xuez-tx
+sudo chmod +x /root/xuez2/xuezd
+sudo chmod +x /root/xuez2/xuez-cli
+sudo chmod +x /root/xuez2/xuez-tx
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2"
 echo "" >> $CONF_DIR2/$CONF_FILE2 && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2
@@ -253,6 +257,8 @@ if [ $number = 2 ]
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
 rm xuez-linux-cli-10110.tgz	
+mkdir /root/xuez3/
+mkdir /root/.xuez3/
 cp /root/xuezd /root/xuez3/xuezd
 cp /root/xuez-cli /root/xuez3/xuez-cli
 cp /root/xuez-tx /root/xuez3/xuez-tx
