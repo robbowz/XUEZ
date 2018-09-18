@@ -104,7 +104,7 @@ echo "Done..."
 echo ""
 
 	echo "Do you want to install several masternodes?"
-	echo "If so, enter  the amount of masternodes you would like to install followed by [ENTER]: "
+	echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] (Maximum 10): "
    	read $number
    	echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
    	echo ""
@@ -140,8 +140,10 @@ echo ""
 	
 
 {
-if [ $number = 1 ]
+if [ $number = 0 ]
 	then
+	exit 0
+	else
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
 rm xuez-linux-cli-10110.tgz
@@ -185,14 +187,14 @@ sudo hostname -I
 	echo "!   					                            !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
-	exit 0
-	else
 fi
 }
 
 {
-if [ $number = 2 ]
+if [ $number = 1 ]
 	then
+	exit 0
+	else
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
 rm xuez-linux-cli-10110.tgz
@@ -236,15 +238,15 @@ sudo hostname -I
 	echo "!   					                            !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
-	exit 0
-	else
 
 fi
 }
 
 {
-if [ $number = 3 ]
+if [ $number = 2 ]
 	then
+	exit 0
+	else
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 		
 tar -xvzf xuez-linux-cli-10110.tgz								
 rm xuez-linux-cli-10110.tgz
@@ -288,8 +290,6 @@ sudo hostname -I
 	echo "!   					                            !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
-	exit 0
-	else
 
 fi
 }
