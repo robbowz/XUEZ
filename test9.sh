@@ -139,7 +139,7 @@ echo ""
 	sudo ufw status
 	
 
-{
+function configure_masternode1() {
 if [ $number = 0 ]
 	then
 	exit 0
@@ -166,18 +166,15 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY
-    mkdir -p $CONF_DIR
-    conffile=/root/.xeuz/xeuz.conf
+	mkdir -p $CONF_DIR
+    	conffile=/root/.xeuz/xeuz.conf
 	IP=$(hostname -I)
-    PASSWORD=`pwgen -1 20 -n`
-	if [ "x$PASSWORD" = "x" ]; then
-	PASSWORD=${WANIP}-`date +%s`
-	fi
-	echo -e "rpcuser=xeuzuser\nrpcpassword=${PASSWORD}\nrpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
-    echo -e "" >> ${conffile}
-	echo -e "" >> ${conffile}
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
+    	echo -e "" >> ${conffile}
 	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY" >> ${conffile}
-    sleep 20
+    	sleep 20
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez
 	sleep 20
 	echo "if server start failure try /root/xuez/xuezd -reindex"
@@ -190,7 +187,7 @@ sudo hostname -I
 fi
 }
 
-{
+function configure_masternode2() {
 if [ $number = 1 ]
 	then
 	exit 0
@@ -217,18 +214,15 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY2
-    mkdir -p $CONF_DIR2
-    conffile=/root/.xeuz2/xeuz2.conf
+    	mkdir -p $CONF_DIR2
+    	conffile=/root/.xeuz2/xeuz2.conf
 	IP=$(hostname -I)
-    PASSWORD=`pwgen -1 20 -n`
-	if [ "x$PASSWORD" = "x" ]; then
-	PASSWORD=${WANIP}-`date +%s`
-	fi
-	echo -e "rpcuser=xeuzuser2\nrpcpassword=${PASSWORD}\nrpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
-    echo -e "" >> ${conffile}
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
 	echo -e "" >> ${conffile}
 	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile}
-    sleep 20
+    	sleep 20
 	/root/xuez2/xuezd -daemon -datadir=/root/.xuez2
 	sleep 20
 	echo "if server start failure try /root/xuez2/xuezd -reindex"
@@ -242,7 +236,8 @@ sudo hostname -I
 fi
 }
 
-{
+
+function configure_masternode3() {
 if [ $number = 2 ]
 	then
 	exit 0
@@ -269,18 +264,15 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY3
-    mkdir -p $CONF_DIR3
-    conffile=/root/.xeuz3/xeuz3.conf
+    	mkdir -p $CONF_DIR3
+    	conffile=/root/.xeuz3/xeuz3.conf
 	IP=$(hostname -I)
-    PASSWORD=`pwgen -1 20 -n`
-	if [ "x$PASSWORD" = "x" ]; then
-	PASSWORD=${WANIP}-`date +%s`
-	fi
-	echo -e "rpcuser=xeuzuser3\nrpcpassword=${PASSWORD}\nrpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
-    echo -e "" >> ${conffile}
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile}
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
 	echo -e "" >> ${conffile}
 	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY3" >> ${conffile}
-    sleep 20
+    	sleep 20
 	/root/xuez3/xuezd -daemon -datadir=/root/.xuez3
 	sleep 20
 	echo "if server start failure try /root/xuez3/xuezd -reindex"
@@ -293,6 +285,11 @@ sudo hostname -I
 
 fi
 }
+
+# main routine
+configure_masternode1
+configure_masternode2
+configure_masternode3
 
 echo "$(cat /.xuez/xuez.conf)"
 echo "$(cat /.xuez2/xuez2.conf)"
