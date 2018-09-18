@@ -180,8 +180,8 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "!        Your first MasterNode Is setup		    !"
-	echo "!   					                            !"
+	echo "!        Your first MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
 fi
@@ -228,8 +228,8 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez2/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "!        Your first MasterNode Is setup		    !"
-	echo "!   					                            !"
+	echo "!        Your second MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
 
@@ -278,8 +278,8 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez3/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "!        Your first MasterNode Is setup		    !"
-	echo "!   					                            !"
+	echo "!        Your third MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
 
