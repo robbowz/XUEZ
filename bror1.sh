@@ -1,9 +1,9 @@
 #/bin/bash
 #Edited by Robbowz - 2018
 
-DATE_STAMP="$(date +%y-%m-%d-%s)
+DATE_STAMP=$(date +%y-%m-%d-%s)
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-SCRIPT_LOGFILE="/root/logtest_${DATE_STAMP}.log"
+SCRIPT_LOGFILE=/root/logtest_${DATE_STAMP}.log
 CONF_DIR=~/root/.xuez\/
 CONF_DIR2=~/root/.xuez2\/
 CONF_DIR3=~/root/.xuez3\/
@@ -38,7 +38,7 @@ PORT=41798
 
 
 function removing_old_files() {
-sudo echo "Removing old files..."
+echo "Removing old files..."
 sudo killall xuezd 
 sudo rm xuezd  && rm xuez-cli && rm xuez-tx 
 sudo rm -rf /root/.xuez && sudo rm -rf /root/xuez 
@@ -51,20 +51,20 @@ sudo rm -rf /root/.xuez7 && sudo rm -rf /root/xuez7
 sudo rm -rf /root/.xuez8 && sudo rm -rf /root/xuez8 
 sudo rm -rf /root/.xuez9 && sudo rm -rf /root/xuez9 
 sudo rm -rf /root/.xuez10 && sudo rm -rf /root/xuez10 
-sudo echo "Done..."
-sudo echo ""
+echo "Done..."
+echo ""
 }
 
 
-	sudo echo "Do you want to install several masternodes?"
-	sudo echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] Maximum 10: "
+	echo "Do you want to install several masternodes?"
+	echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] Maximum 10: "
    	read $number
-   	sudo echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
-   	sudo echo ""
+   	echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
+   	echo ""
 
 
 function tor_installation() {
-    sudo su -c "sudo echo "deb http://deb.torproject.org/torproject.org "$(lsb_release -c | cut -f2)" main" > /etc/apt/sources.list.d/torproject.list" 
+    sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" 
 	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 
 	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - 
 	sudo apt-get update 
@@ -73,17 +73,17 @@ function tor_installation() {
     logout
     login root
 
-	sudo sed -i "s/#ControlPort 9051/ControlPort 9051/g" /etc/tor/torrc
-	sudo sed -i "s/#CookieAuthentication 1/CookieAuthentication 1/g" /etc/tor/torrc
-	sudo su -c "CookieAuthFileGroupReadable 1" >> /etc/tor/torrc
-	sudo su -c "LongLivedPorts 9033" >> /etc/tor/torrc
+	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc
+	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
+	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc"
+	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
 	sudo systemctl restart tor.service
     }
 	
 
 function install_packages() {
 	cd ~
-	sudo echo "Install packages..."
+	echo "Install packages..."
     sudo apt-get -y upgrade 
 	sudo apt-get -y dist-upgrade 
 	sudo apt-get install -y ufw 
@@ -94,11 +94,12 @@ function install_packages() {
 	sudo git nano python-virtualenv pwgen virtualenv \
 	pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common \
 	libboost-all-dev libminiupnpc-dev libdb4.8-dev libdb4.8++-dev 
-	sudo echo "Install done..."
+	echo "Install done..."
 }
 
 
 function install_firewall() {
+    echo "Installing Firewall..."
 	sudo ufw allow ssh/tcp 
 	sudo ufw limit ssh/tcp 
 	sudo ufw logging on 
@@ -106,8 +107,9 @@ function install_firewall() {
 	sudo ufw allow 41798 
    	sudo ufw allow 9051 
     sudo ufw allow 9033 
-	sudo echo "y" | sudo ufw enable
-	sudo ufw status 
+	echo "y" | sudo ufw enable
+	sudo ufw status
+    echo "Firewall done..."
 }
 
 
@@ -117,7 +119,7 @@ if [ $number = 0 ]
 	exit 0 
 	else 
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 
-tar -xvzf xuez-linux-cli-10110.tgz	&>> ${SCRIPT_LOGFILE}			
+tar -xvzf xuez-linux-cli-10110.tgz
 rm xuez-linux-cli-10110.tgz 
 mkdir /root/xuez/ 
 mkdir /root/.xuez/ 
@@ -128,33 +130,33 @@ sudo chmod +x /root/xuez/xuezd
 sudo chmod +x /root/xuez/xuez-cli 
 sudo chmod +x /root/xuez/xuez-tx 
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR/$CONF_FILE 
-sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 
-sudo echo "Masternode Configuration"
-sudo echo "Your recognised IP address is:"
+echo "Masternode Configuration"
+echo "Your recognised IP address is:"
 sudo hostname -I 
-	sudo echo ""
-	sudo echo "We are using your default IP address"
-	sudo echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
+	echo ""
+	echo "We are using your default IP address"
+	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY 
 	mkdir -p $CONF_DIR 
     conffile=/root/.xeuz/xeuz.conf 
 	IP=$(hostname -I) 
-	sudo echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
-	sudo echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
-	sudo echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile} 
-    sudo echo -e "" >> ${conffile} 
-	sudo echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY" >> ${conffile} 
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile} 
+    echo -e "" >> ${conffile} 
+	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY" >> ${conffile} 
     sleep 20 
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez 
 	sleep 20
-	sudo echo "if server start failure try /root/xuez/xuezd -reindex"
-	sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	sudo echo "!                                                 !"
-	sudo echo "!        Your first MasterNode Is setup			!"
-	sudo echo "!   					        					!"
-	sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	sudo echo ""
+	echo "if server start failure try /root/xuez/xuezd -reindex"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "!                                                 !"
+	echo "!        Your first MasterNode Is setup			!"
+	echo "!   					        					!"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo ""
 fi
 }
 
@@ -165,7 +167,7 @@ if [ $number = 1 ]
 	exit 0 
 	else 
 wget https://bitbucket.org/davembg/xuez-distribution-repo/downloads/xuez-linux-cli-10110.tgz 
-tar -xvzf xuez-linux-cli-10110.tgz	&>> ${SCRIPT_LOGFILE}
+tar -xvzf xuez-linux-cli-10110.tgz
 rm xuez-linux-cli-10110.tgz 
 mkdir /root/xuez2/ 
 mkdir /root/.xuez2/ 
@@ -176,33 +178,33 @@ sudo chmod +x /root/xuez2/xuezd
 sudo chmod +x /root/xuez2/xuez-cli 
 sudo chmod +x /root/xuez2/xuez-tx 
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR2/$CONF_FILE2 
-sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx		
 
-sudo echo "Masternode Configuration"
-sudo echo "Your recognised IP address is:"
+echo "Masternode Configuration"
+echo "Your recognised IP address is:"
 sudo hostname -I 
-	sudo echo ""
-	sudo echo "We are using your default IP address"
-	sudo echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
+	echo ""
+	echo "We are using your default IP address"
+	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY2 
     mkdir -p $CONF_DIR2 
     conffile2=/root/.xeuz2/xeuz2.conf 
 	IP=$(hostname -I)
-	sudo echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
-	sudo echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
-	sudo echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile2} 
-	sudo echo -e "" >> ${conffile2} 
-	sudo echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile2} 
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile2} 
+	echo -e "" >> ${conffile2} 
+	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile2} 
     sleep 20
 	/root/xuez2/xuezd -daemon -datadir=/root/.xuez2 
 	sleep 20
-	sudo echo "if server start failure try /root/xuez2/xuezd -reindex"
-	sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	sudo echo "!                                                 !"
-	sudo echo "!        Your second MasterNode Is setup			!"
-	sudo echo "!   					        					!"
-	sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	sudo echo ""
+	echo "if server start failure try /root/xuez2/xuezd -reindex"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "!                                                 !"
+	echo "!        Your second MasterNode Is setup			!"
+	echo "!   					        					!"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo ""
 
 fi
 }
@@ -227,30 +229,30 @@ sudo chmod +x /root/xuez3/xuez-tx
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR3/$CONF_FILE3 
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 
-sudo echo "Masternode Configuration"
-sudo echo "Your recognised IP address is:"
+echo "Masternode Configuration"
+echo "Your recognised IP address is:"
 sudo hostname -I 
-sudo echo ""
-sudo echo "We are using your default IP address"
-sudo echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
+echo ""
+echo "We are using your default IP address"
+echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 read PRIVKEY3
 mkdir -p $CONF_DIR3
 conffile3=/root/.xeuz3/xeuz3.conf
 IP=$(hostname -I)
-sudo echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
-sudo echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
-sudo echo -e "rpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile3}
-sudo echo -e "" >> ${conffile3}
-sudo echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY3" >> ${conffile3}
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
+echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
+echo -e "rpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile3}
+echo -e "" >> ${conffile3}
+echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY3" >> ${conffile3}
 sleep 20
 /root/xuez3/xuezd -daemon -datadir=/root/.xuez3
 sleep 20
-sudo echo "if server start failure try /root/xuez3/xuezd -reindex"
-sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-sudo echo "!                                                 !"
-sudo echo "!        Your third MasterNode Is setup		    !"
-sudo echo "!   					                            !"
-sudo echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "if server start failure try /root/xuez3/xuezd -reindex"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "!                                                 !"
+echo "!        Your third MasterNode Is setup		     !"
+echo "!   					                             !"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 fi
 }
@@ -265,6 +267,6 @@ configure_masternode1
 configure_masternode2
 configure_masternode3
 
-sudo echo All done!
+echo "All done!"
 exit
 cd ~/
