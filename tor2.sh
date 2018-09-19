@@ -124,10 +124,10 @@ function tor_installation() {
     logout
     login root
 
-	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc
-	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
-	sudo su -c 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc
-	sudo su -c 'LongLivedPorts 9033' >> /etc/tor/torrc
+	sudo sed -i "s/#ControlPort 9051/ControlPort 9051/g" /etc/tor/torrc
+	sudo sed -i "s/#CookieAuthentication 1/CookieAuthentication 1/g" /etc/tor/torrc
+	sudo su -c "CookieAuthFileGroupReadable 1" >> /etc/tor/torrc
+	sudo su -c "LongLivedPorts 9033" >> /etc/tor/torrc
 	sudo systemctl restart tor.service
     }
 	
