@@ -157,9 +157,10 @@ cp /root/xuez-tx /root/xuez/xuez-tx &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez/xuezd &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez/xuez-cli &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez/xuez-tx &>> ${SCRIPT_LOGFILE}
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
-sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE" &>> ${SCRIPT_LOGFILE}
-echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
+#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE" &>> ${SCRIPT_LOGFILE}
+#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -205,9 +206,10 @@ cp /root/xuez-tx /root/xuez2/xuez-tx &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez2/xuezd &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez2/xuez-cli &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez2/xuez-tx &>> ${SCRIPT_LOGFILE}
-sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx &>> ${SCRIPT_LOGFILE}	
-sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2" &>> ${SCRIPT_LOGFILE}
-echo "" >> $CONF_DIR2/$CONF_FILE2 && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
+#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2" &>> ${SCRIPT_LOGFILE}
+#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -217,13 +219,13 @@ sudo hostname -I &>> ${SCRIPT_LOGFILE}
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY2 &>> ${SCRIPT_LOGFILE}
     mkdir -p $CONF_DIR2 &>> ${SCRIPT_LOGFILE}
-    conffile=/root/.xeuz2/xeuz2.conf &>> ${SCRIPT_LOGFILE}
+    conffile2=/root/.xeuz2/xeuz2.conf &>> ${SCRIPT_LOGFILE}
 	IP=$(hostname -I)
-	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} &>> ${SCRIPT_LOGFILE}
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} &>> ${SCRIPT_LOGFILE}
-	echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile} &>> ${SCRIPT_LOGFILE}
-	echo -e "" >> ${conffile} &>> ${SCRIPT_LOGFILE}
-	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile} &>> ${SCRIPT_LOGFILE}
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} &>> ${SCRIPT_LOGFILE}
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} &>> ${SCRIPT_LOGFILE}
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile2} &>> ${SCRIPT_LOGFILE}
+	echo -e "" >> ${conffile2} &>> ${SCRIPT_LOGFILE}
+	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile2} &>> ${SCRIPT_LOGFILE}
     sleep 20
 	/root/xuez2/xuezd -daemon -datadir=/root/.xuez2 &>> ${SCRIPT_LOGFILE}
 	sleep 20
@@ -255,9 +257,10 @@ cp /root/xuez-tx /root/xuez3/xuez-tx
 sudo chmod +x /root/xuez3/xuezd
 sudo chmod +x /root/xuez3/xuez-cli
 sudo chmod +x /root/xuez3/xuez-tx
-sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx							
-sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR3/$CONF_FILE3"
-echo "" >> $CONF_DIR3/$CONF_FILE3 && echo "listenonion=1"  >> $CONF_DIR3/$CONF_FILE3
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR3/$CONF_FILE3 &>> ${SCRIPT_LOGFILE}
+sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
+#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR3/$CONF_FILE3" &>> ${SCRIPT_LOGFILE}
+#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR3/$CONF_FILE3 &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -267,13 +270,13 @@ sudo hostname -I
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY3
     	mkdir -p $CONF_DIR3
-    	conffile=/root/.xeuz3/xeuz3.conf
+    	conffile3=/root/.xeuz3/xeuz3.conf
 	IP=$(hostname -I)
-	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile}
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile}
-	echo -e "rpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile}
-	echo -e "" >> ${conffile}
-	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY3" >> ${conffile}
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
+	echo -e "rpcallowip=127.0.0.1\nrpcport=41801\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile3}
+	echo -e "" >> ${conffile3}
+	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY3" >> ${conffile3}
     	sleep 20
 	/root/xuez3/xuezd -daemon -datadir=/root/.xuez3
 	sleep 20
