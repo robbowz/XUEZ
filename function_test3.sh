@@ -88,8 +88,6 @@ echo "!                                                 !"
 echo "!        Your third MasterNode Is setup		     !"
 echo "!   					                             !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-fi
 }
 
 
@@ -119,8 +117,6 @@ echo "!                                                 !"
 echo "!        Your third MasterNode Is setup		     !"
 echo "!   					                             !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-fi
 }
 
 
@@ -150,8 +146,6 @@ echo "!                                                 !"
 echo "!        Your third MasterNode Is setup		     !"
 echo "!   					                             !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-fi
 }
 
 
@@ -181,8 +175,6 @@ echo "!                                                 !"
 echo "!        Your third MasterNode Is setup		     !"
 echo "!   					                             !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-fi
 }
 
 
