@@ -54,15 +54,23 @@ echo ""
 }
 
 
-	echo "Do you want to install several masternodes?"
-	echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] Maximum 10: "
-   	read $number
-   	echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
-   	echo ""
+COUNTER=0
+while [  $COUNTER -lt $NODES ]; do
+    let CURRENTNODE=COUNTER+1
+    echo -e "NODE $CURRENTNODE"
+
+    let COUNTER=COUNTER+1 
+done
+
+# Get number
+echo "Enter amount of folders to be installed, followed by [ENTER]: $"
+read NODES
 
 
-
-function configure_masternode1() {
+#install node
+install_node () {
+CURRENTNODE=$1
+echo -e "NODE $CURRENTNODE"
 cd ~/
 mkdir /root/xuez/
 mkdir /root/.xuez/
@@ -91,7 +99,10 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 }
 
 
-function configure_masternode2() {
+#install node
+install_node () {
+CURRENTNODE=$1
+echo -e "NODE $CURRENTNODE"
 cd ~/
 mkdir /root/xuez2/
 mkdir /root/.xuez2/
@@ -120,7 +131,10 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 }
 
 
-function configure_masternode3() {
+#install node
+install_node () {
+CURRENTNODE=$1
+echo -e "NODE $CURRENTNODE"
 cd ~/
 mkdir /root/xuez3/
 mkdir /root/.xuez3/
@@ -149,7 +163,10 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 }
 
 
-function configure_masternode4() {
+#install node
+install_node () {
+CURRENTNODE=$1
+echo -e "NODE $CURRENTNODE"
 cd ~/
 mkdir /root/xuez4/
 mkdir /root/.xuez4/
@@ -180,23 +197,12 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 # main routine
 removing_old_files
-configure_masternode1
-if [ "$number" = "1" ]; then
-  echo -e "$number of Masternodes installed. Exiting script."
-  exit 1
-fi
-
-configure_masternode2
-if [ "$number" = "2" ]; then
-  echo -e "$number of Masternodes installed. Exiting script."
-  exit 1
-fi
-
-configure_masternode3
-if [ "$number" = "3" ]; then
-  echo -e "$number of Masternodes installed. Exiting script."
-  exit 1
-fi
+COUNTER=0
+while [  $COUNTER -lt $NODES ]; do
+	let CURRENTNODE=COUNTER+1
+	instalkl_node "$CURRENTNODE"
+	let COUNTER=COUNTER+1
+done
 
 echo "All done!"
 exit
