@@ -119,11 +119,11 @@ echo ""
 	sudo apt-get -y install tor deb.torproject.org-keyring &>> ${SCRIPT_LOGFILE}
 	sudo usermod -a -G debian-tor $(whoami) &>> ${SCRIPT_LOGFILE}
 
-	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc &>> ${SCRIPT_LOGFILE}
-	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc &>> ${SCRIPT_LOGFILE}
-	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc" &>> ${SCRIPT_LOGFILE}
-	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc" &>> ${SCRIPT_LOGFILE}
-	sudo systemctl restart tor.service &>> ${SCRIPT_LOGFILE}
+	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc
+	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
+	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc"
+	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
+	sudo systemctl restart tor.service
 
 	
 	sudo apt-get update &>> ${SCRIPT_LOGFILE}
@@ -291,3 +291,6 @@ fi
 configure_masternode1
 configure_masternode2
 configure_masternode3
+
+echo "All done!"
+cd ~/
