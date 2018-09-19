@@ -127,7 +127,7 @@ cp /root/xuez-tx /root/xuez/xuez-tx
 sudo chmod +x /root/xuez/xuezd 
 sudo chmod +x /root/xuez/xuez-cli 
 sudo chmod +x /root/xuez/xuez-tx 
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR/$CONF_FILE 
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz/xeuz.conf
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 
 echo "Masternode Configuration"
@@ -137,15 +137,14 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY 
-	mkdir -p $CONF_DIR 
-    conffile=/root/.xeuz/xeuz.conf 
+    	conffile=/root/.xeuz/xeuz.conf 
 	IP=$(hostname -I) 
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
 	echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile} 
-    echo -e "" >> ${conffile} 
+    	echo -e "" >> ${conffile} 
 	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY" >> ${conffile} 
-    sleep 20 
+    	sleep 20 
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez 
 	sleep 20
 	echo "if server start failure try /root/xuez/xuezd -reindex"
@@ -175,7 +174,7 @@ cp /root/xuez-tx /root/xuez2/xuez-tx
 sudo chmod +x /root/xuez2/xuezd 
 sudo chmod +x /root/xuez2/xuez-cli 
 sudo chmod +x /root/xuez2/xuez-tx 
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR2/$CONF_FILE2 
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz2/xeuz2.conf 
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx		
 
 echo "Masternode Configuration"
@@ -185,15 +184,14 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY2 
-    mkdir -p $CONF_DIR2 
-    conffile2=/root/.xeuz2/xeuz2.conf 
+    	conffile2=/root/.xeuz2/xeuz2.conf 
 	IP=$(hostname -I)
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
 	echo -e "rpcallowip=127.0.0.1\nrpcport=41800\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1"  >> ${conffile2} 
 	echo -e "" >> ${conffile2} 
 	echo -e "port=$PORT\masternodeaddr=$IP:$PORT\masternodeprivkey=$PRIVKEY2" >> ${conffile2} 
-    sleep 20
+    	sleep 20
 	/root/xuez2/xuezd -daemon -datadir=/root/.xuez2 
 	sleep 20
 	echo "if server start failure try /root/xuez2/xuezd -reindex"
@@ -224,7 +222,7 @@ cp /root/xuez-tx /root/xuez3/xuez-tx
 sudo chmod +x /root/xuez3/xuezd
 sudo chmod +x /root/xuez3/xuez-cli
 sudo chmod +x /root/xuez3/xuez-tx
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR3/$CONF_FILE3 
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz3/xeuz3.conf
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
 
 echo "Masternode Configuration"
@@ -234,7 +232,6 @@ echo ""
 echo "We are using your default IP address"
 echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 read PRIVKEY3
-mkdir -p $CONF_DIR3
 conffile3=/root/.xeuz3/xeuz3.conf
 IP=$(hostname -I)
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
