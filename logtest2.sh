@@ -1,8 +1,9 @@
 #/bin/bash
 #Edited by Robbowz - 2018
 
+DATE_STAMP="$(date +%y-%m-%d-%s)
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-SCRIPT_LOGFILE="/tmp/glyno_node_${DATE_STAMP}_out.log"
+SCRIPT_LOGFILE="/root/logtest_${DATE_STAMP}.log"
 CONF_DIR=~/root/.xuez\/
 CONF_DIR2=~/root/.xuez2\/
 CONF_DIR3=~/root/.xuez3\/
