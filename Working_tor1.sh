@@ -75,7 +75,12 @@ function tor_installation() {
 	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
 	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc"
 	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
+	sudo su -c "echo 'HiddenServiceDir /etc/tor/hidden_service/"
 	sudo systemctl restart tor.service
+	sleep 10
+	if [[ -f /etc/tor/hidden_service/hostname ]]; then
+  	TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`
+	fi
     }
 	
 
@@ -147,7 +152,7 @@ sudo hostname -I
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
     echo -e "" >> ${conffile} 
-    echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$IP:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
+    echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
     sleep 1
     cd ~/
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez 
