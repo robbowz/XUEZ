@@ -267,5 +267,5 @@ configure_masternode1
 configure_masternode2
 configure_masternode3
 
-echo "All done!"
+echo All done!
 cd ~/
