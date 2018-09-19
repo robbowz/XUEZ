@@ -181,15 +181,15 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 # main routine
 removing_old_files
 configure_masternode1
-if [[ $number = 0 ]];  then
-configure_masternode2
-else
-    echo -e "$number of Masternodes installed. Exiting script."
-    exit 0
-fi
-
-configure_masternode2
 if [[ $number = 1 ]];  then
+configure_masternode2
+else
+    echo -e "$number of Masternodes installed. Exiting script."
+    exit 0
+fi
+
+configure_masternode2
+if [[ $number = 2 ]];  then
 configure_masternode3
 else
     echo -e "$number of Masternodes installed. Exiting script."
@@ -197,7 +197,7 @@ else
 fi
 
 configure_masternode3
-if [[ $number = 2 ]];  then
+if [[ $number = 3 ]];  then
 configure_masternode4
 else
     echo -e "$number of Masternodes installed. Exiting script."
