@@ -160,8 +160,8 @@ sudo chmod +x /root/xuez/xuez-cli &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez/xuez-tx &>> ${SCRIPT_LOGFILE}
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
-#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE" &>> ${SCRIPT_LOGFILE}
-#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
+# sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR/$CONF_FILE" &>> ${SCRIPT_LOGFILE}
+# echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR/$CONF_FILE &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -209,8 +209,8 @@ sudo chmod +x /root/xuez2/xuez-cli &>> ${SCRIPT_LOGFILE}
 sudo chmod +x /root/xuez2/xuez-tx &>> ${SCRIPT_LOGFILE}
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
-#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2" &>> ${SCRIPT_LOGFILE}
-#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
+# sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR2/$CONF_FILE2" &>> ${SCRIPT_LOGFILE}
+# echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR2/$CONF_FILE2 &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -260,8 +260,8 @@ sudo chmod +x /root/xuez3/xuez-cli
 sudo chmod +x /root/xuez3/xuez-tx
 sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > $CONF_DIR3/$CONF_FILE3 &>> ${SCRIPT_LOGFILE}
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx	&>> ${SCRIPT_LOGFILE}			
-#sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR3/$CONF_FILE3" &>> ${SCRIPT_LOGFILE}
-#echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR3/$CONF_FILE3 &>> ${SCRIPT_LOGFILE}
+# sudo su -c "echo -e 'listenonion=1' >> $CONF_DIR3/$CONF_FILE3" &>> ${SCRIPT_LOGFILE}
+# echo "" >> $CONF_DIR/$CONF_FILE && echo "listenonion=1"  >> $CONF_DIR3/$CONF_FILE3 &>> ${SCRIPT_LOGFILE}
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -297,6 +297,6 @@ configure_masternode1
 configure_masternode2
 configure_masternode3
 
-echo "$(cat /.xuez/xuez.conf)"
-echo "$(cat /.xuez2/xuez2.conf)"
-echo "$(cat /.xuez3/xuez3.conf)"
+echo " cat /.xuez/xuez.conf "
+echo " cat /.xuez2/xuez2.conf "
+echo " cat /.xuez3/xuez3.conf "
