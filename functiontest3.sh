@@ -63,54 +63,6 @@ echo ""
    	echo ""
 
 
-function tor_installation() {
-    sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" 
-	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 
-	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - 
-	sudo apt-get update 
-	sudo apt-get -y install tor deb.torproject.org-keyring 
-	sudo usermod -a -G debian-tor $(whoami) 
-
-	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc
-	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
-	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc"
-	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
-	sudo systemctl restart tor.service
-    }
-	
-
-function install_packages() {
-	cd ~
-	echo "Install packages..."
-    sudo apt-get -y upgrade 
-	sudo apt-get -y dist-upgrade 
-	sudo apt-get install -y ufw 
-	sudo add-apt-repository -yu ppa:bitcoin/bitcoin  
-	sudo apt-get -y update 
-	sudo apt-get -y install libzmq3-dev 
-	sudo apt-get -y install wget make automake autoconf build-essential libtool autotools-dev \
-	sudo git nano python-virtualenv pwgen virtualenv \
-	pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common \
-	libboost-all-dev libminiupnpc-dev libdb4.8-dev libdb4.8++-dev 
-	echo "Install done..."
-}
-
-
-function install_firewall() {
-    echo "Installing Firewall..."
-	sudo ufw allow ssh/tcp 
-	sudo ufw limit ssh/tcp 
-	sudo ufw logging on 
-	sudo ufw allow 22 
-	sudo ufw allow 41798 
-   	sudo ufw allow 9051 
-    sudo ufw allow 9033 
-	echo "y" | sudo ufw enable
-	sudo ufw status
-    echo "Firewall done..."
-}
-
-
 function configure_masternode1() {
 if [ $number = 0 ] 
 	then 
@@ -130,10 +82,10 @@ sudo chmod +x /root/xuez/xuez-cli
 sudo chmod +x /root/xuez/xuez-tx 
 cd ~/
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
-cd .xeuz
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz/xeuz.conf
-sudo printf "" > /root/.xeuz/xeuz.conf
-sudo chmod +x xeuz.conf
+cd .xuez
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xuez/xuez.conf
+sudo printf "" > /root/.xuez/xuez.conf
+sudo chmod +x xuez.conf
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -142,7 +94,7 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY 
-    conffile=/root/.xeuz/xeuz.conf 
+    conffile=/root/.xuez/xuez.conf 
 	IP=$(hostname -I) 
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
@@ -182,10 +134,10 @@ sudo chmod +x /root/xuez2/xuez-cli
 sudo chmod +x /root/xuez2/xuez-tx 
 cd ~/
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
-cd .xeuz2
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz2/xeuz2.conf
-sudo printf "" > /root/.xeuz2/xeuz2.conf
-sudo chmod +x xeuz2.conf
+cd .xuez2
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xuez2/xuez2.conf
+sudo printf "" > /root/.xuez2/xuez2.conf
+sudo chmod +x xuez2.conf
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -194,7 +146,7 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY2 
-    	conffile2=/root/.xeuz2/xeuz2.conf 
+    	conffile2=/root/.xuez2/xuez2.conf 
 	IP=$(hostname -I)
 	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
@@ -235,10 +187,10 @@ sudo chmod +x /root/xuez3/xuez-cli
 sudo chmod +x /root/xuez3/xuez-tx
 cd ~/
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
-cd .xeuz3
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz3/xeuz3.conf
-sudo printf "" > /root/.xeuz3/xeuz3.conf
-sudo chmod +x xeuz3.conf
+cd .xuez3
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xuez3/xuez3.conf
+sudo printf "" > /root/.xuez3/xuez3.conf
+sudo chmod +x xuez3.conf
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -247,7 +199,7 @@ echo ""
 echo "We are using your default IP address"
 echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 read PRIVKEY3
-conffile3=/root/.xeuz3/xeuz3.conf
+conffile3=/root/.xuez3/xuez3.conf
 IP=$(hostname -I)
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
 echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3}
@@ -287,10 +239,10 @@ sudo chmod +x /root/xuez4/xuez-cli
 sudo chmod +x /root/xuez4/xuez-tx
 cd ~/
 sudo rm xuezd && sudo rm xuez-cli && sudo rm xuez-tx
-cd .xeuz4
-sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xeuz4/xeuz4.conf
-sudo printf "" > /root/.xeuz4/xeuz4.conf
-sudo chmod +x xeuz4.conf
+cd .xuez4
+sudo printf "##XUEZ MASTERNODE CONFIGURATION##\n" > /root/.xuez4/xuez4.conf
+sudo printf "" > /root/.xuez4/xuez4.conf
+sudo chmod +x xuez4.conf
 
 echo "Masternode Configuration"
 echo "Your recognised IP address is:"
@@ -299,7 +251,7 @@ echo ""
 echo "We are using your default IP address"
 echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 read PRIVKEY4
-conffile4=/root/.xeuz4/xeuz4.conf
+conffile4=/root/.xuez4/xuez4.conf
 IP=$(hostname -I)
 echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile4}
 echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile4}
@@ -322,9 +274,6 @@ fi
 
 # main routine
 removing_old_files
-tor_installation
-install_packages
-install_firewall
 configure_masternode1
 if [[ $number = 0 ]];  then
 configure_masternode2
