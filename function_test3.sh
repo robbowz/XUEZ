@@ -39,8 +39,6 @@ PORT=41798
 
 function removing_old_files() {
 echo "Removing old files..."
-sudo killall xuezd 
-sudo rm xuezd  && rm xuez-cli && rm xuez-tx 
 sudo rm -rf /root/.xuez && sudo rm -rf /root/xuez 
 sudo rm -rf /root/.xuez2 && sudo rm -rf /root/xuez2 
 sudo rm -rf /root/.xuez3 && sudo rm -rf /root/xuez3 
@@ -65,11 +63,6 @@ echo ""
 
 
 function configure_masternode1() {
-if [ $number = 0 ]
-	then
-	exit 0
-	else
-  
 cd ~/
 mkdir /root/xuez/
 mkdir /root/.xuez/
@@ -101,11 +94,6 @@ fi
 
 
 function configure_masternode2() {
-if [ $number = 1 ]
-	then
-	exit 0
-	else
-  
 cd ~/
 mkdir /root/xuez2/
 mkdir /root/.xuez2/
@@ -137,11 +125,6 @@ fi
 
 
 function configure_masternode3() {
-if [ $number = 2 ]
-	then
-	exit 0
-	else
-  
 cd ~/
 mkdir /root/xuez3/
 mkdir /root/.xuez3/
@@ -173,11 +156,6 @@ fi
 
 
 function configure_masternode4() {
-if [ $number = 3 ]
-	then
-	exit 0
-	else
-  
 cd ~/
 mkdir /root/xuez4/
 mkdir /root/.xuez4/
