@@ -4,16 +4,16 @@
 DATE_STAMP="$(date +%y-%m-%d-%s)
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 SCRIPT_LOGFILE="/root/logtest_${DATE_STAMP}.log"
-CONF_DIR=~/root/.xuez\/
-CONF_DIR2=~/root/.xuez2\/
-CONF_DIR3=~/root/.xuez3\/
-CONF_DIR4=~/root/.xuez4\/
-CONF_DIR5=~/root/.xuez5\/
-CONF_DIR6=~/root/.xuez6\/
-CONF_DIR7=~/root/.xuez7\/
-CONF_DIR8=~/root/.xuez8\/
-CONF_DIR9=~/root/.xuez9\/
-CONF_DIR10=~/root/.xuez10\/
+CONF_DIR=/root/.xuez\/
+CONF_DIR2=/root/.xuez2\/
+CONF_DIR3=/root/.xuez3\/
+CONF_DIR4=/root/.xuez4\/
+CONF_DIR5=/root/.xuez5\/
+CONF_DIR6=/root/.xuez6\/
+CONF_DIR7=/root/.xuez7\/
+CONF_DIR8=/root/.xuez8\/
+CONF_DIR9=/root/.xuez9\/
+CONF_DIR10=/root/.xuez10\/
 CONF_FILE=xuez.conf
 CONF_FILE2=xuez2.conf
 CONF_FILE3=xuez3.conf
@@ -115,7 +115,7 @@ echo ""
    	echo ""
 
 function tor_installation() {
-    sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" &>> ${SCRIPT_LOGFILE}
+    sudo su -c "echo "deb http://deb.torproject.org/torproject.org "$(lsb_release -c | cut -f2)" main" > /etc/apt/sources.list.d/torproject.list" &>> ${SCRIPT_LOGFILE}
 	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 &>> ${SCRIPT_LOGFILE}
 	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - &>> ${SCRIPT_LOGFILE}
 	sudo apt-get update &>> ${SCRIPT_LOGFILE}
