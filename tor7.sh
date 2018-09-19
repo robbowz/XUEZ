@@ -252,7 +252,6 @@ echo "!                                                 !"
 echo "!        Your third MasterNode Is setup		    !"
 echo "!   					                            !"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo ""
 
 fi
 }
@@ -268,4 +267,5 @@ configure_masternode2
 configure_masternode3
 
 echo All done!
+exit
 cd ~/
