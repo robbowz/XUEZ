@@ -58,7 +58,7 @@ echo ""
 
     echo -e "[0;35m Logfile:[0m ${SCRIPT_LOGFILE}"
 	echo "Do you want to install several masternodes?"
-	echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] (Maximum 10): "
+	echo "If so, enter the amount of masternodes you would like to install followed by [ENTER] Maximum 10: "
    	read $number
    	echo "We will now begin to install the pre-requisites and $number of XUEZ Coin masternodes."
    	echo ""
