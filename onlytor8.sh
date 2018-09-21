@@ -1,28 +1,5 @@
 #!/bin/bash
 
-DATE_STAMP=$(date +%y-%m-%d-%s)
-WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-SCRIPT_LOGFILE=/root/logtest_${DATE_STAMP}.log
-PORT=41798
-
-
-echo "Removing old files..."
-sudo killall xuezd 
-sudo rm xuezd  && rm xuez-cli && rm xuez-tx 
-sudo rm -rf /root/.xuez && sudo rm -rf /root/xuez 
-sudo rm -rf /root/.xuez2 && sudo rm -rf /root/xuez2 
-sudo rm -rf /root/.xuez3 && sudo rm -rf /root/xuez3 
-sudo rm -rf /root/.xuez4 && sudo rm -rf /root/xuez4 
-sudo rm -rf /root/.xuez5 && sudo rm -rf /root/xuez5 
-sudo rm -rf /root/.xuez6 && sudo rm -rf /root/xuez6 
-sudo rm -rf /root/.xuez7 && sudo rm -rf /root/xuez7 
-sudo rm -rf /root/.xuez8 && sudo rm -rf /root/xuez8 
-sudo rm -rf /root/.xuez9 && sudo rm -rf /root/xuez9 
-sudo rm -rf /root/.xuez10 && sudo rm -rf /root/xuez10 
-echo "Done..."
-echo ""
-
-
 # TOR INSTALLATION
         sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" 
 	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 
@@ -84,7 +61,7 @@ echo ""
 #	echo "Install done..."
 
 
-  	echo "The TOR address of your masternode is: $TORHOSTNAME"
+echo "The TOR address of your masternode is: $TORHOSTNAME"
 
 
 echo "All done!"
