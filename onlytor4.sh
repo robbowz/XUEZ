@@ -74,8 +74,7 @@ echo ""
 	sudo rm -R /etc/tor/hidden_service 2>/dev/null
 	/etc/init.d/tor start
 	echo "Starting TOR, please wait..."
-	sleep 5 # Give tor enough time to connect before we continue
-	sleep 10
+	sleep 5
  	TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`
 
 
@@ -122,17 +121,17 @@ echo ""
 #	echo "Install done..."
 
 
-    echo "Installing Firewall..."
-	sudo ufw allow ssh/tcp 
-	sudo ufw limit ssh/tcp 
-	sudo ufw logging on 
-	sudo ufw allow 22 
-	sudo ufw allow 41798 
-   	sudo ufw allow 9051 
-    sudo ufw allow 9033 
-	echo "y" | sudo ufw enable
-	sudo ufw status
-    echo "Firewall done..."
+echo "Installing Firewall..."
+sudo ufw allow ssh/tcp 
+sudo ufw limit ssh/tcp 
+sudo ufw logging on 
+sudo ufw allow 22 
+sudo ufw allow 41798 
+sudo ufw allow 9051 
+sudo ufw allow 9033 
+echo "y" | sudo ufw enable
+sudo ufw status
+echo "Firewall done..."
 
 
 # setup Wallet
@@ -175,11 +174,11 @@ sudo hostname -I
 	echo "if server start failure try /root/xuez/xuezd -reindex"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "!                                                 !"
-	echo "!        Your first MasterNode Is setup			!"
-	echo "!   					        					!"
+	echo "!        Your first MasterNode Is setup		!"
+	echo "!   					        !"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo ""
-  echo "The TOR address of your masternode is: $TORHOSTNAME"
+  	echo "The TOR address of your masternode is: $TORHOSTNAME"
 
 
 echo "All done!"
