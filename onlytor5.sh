@@ -68,8 +68,7 @@ echo ""
 	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
 	sudo su -c "echo 'HiddenServiceDir /etc/tor/hidden_service/"
 	sudo systemctl restart tor.service
-	cat >> /etc/tor/torrc << EOL
-	EOL
+	sleep 2
 	/etc/init.d/tor stop
 	sudo rm -R /etc/tor/hidden_service 2>/dev/null
 	/etc/init.d/tor start
