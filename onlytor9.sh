@@ -1,21 +1,23 @@
 #!/bin/bash
 
-# TOR INSTALLATION
-        sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" 
-	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 
-	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - 
-	sudo apt-get update 
-	sudo apt-get -y install tor deb.torproject.org-keyring 
-	sudo usermod -a -G debian-tor $(whoami) 
+SCRIPT_LOGFILE="/tmp/tor_${DATE_STAMP}_out.log"
 
-	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc
-	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc
-	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc"
-	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
-	sudo su -c "echo 'HiddenServiceDir /etc/tor/hidden_service/"
-	sudo systemctl restart tor.service
+# TOR INSTALLATION
+        sudo su -c "echo 'deb http://deb.torproject.org/torproject.org '$(lsb_release -c | cut -f2)' main' > /etc/apt/sources.list.d/torproject.list" &>> ${SCRIPT_LOGFILE} 
+	gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 &>> ${SCRIPT_LOGFILE}
+	gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - &>> ${SCRIPT_LOGFILE}
+	sudo apt-get update &>> ${SCRIPT_LOGFILE}
+	sudo apt-get -y install tor deb.torproject.org-keyring &>> ${SCRIPT_LOGFILE}
+	sudo usermod -a -G debian-tor $(whoami) &>> ${SCRIPT_LOGFILE}
+
+	sudo sed -i 's/#ControlPort 9051/ControlPort 9051/g' /etc/tor/torrc &>> ${SCRIPT_LOGFILE}
+	sudo sed -i 's/#CookieAuthentication 1/CookieAuthentication 1/g' /etc/tor/torrc &>> ${SCRIPT_LOGFILE}
+	sudo su -c "echo 'CookieAuthFileGroupReadable 1' >> /etc/tor/torrc" &>> ${SCRIPT_LOGFILE}
+	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc" &>> ${SCRIPT_LOGFILE}
+	sudo su -c "echo 'HiddenServiceDir /etc/tor/hidden_service/" &>> ${SCRIPT_LOGFILE}
+	sudo systemctl restart tor.service &>> ${SCRIPT_LOGFILE}
 	sleep 5
- 	TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`
+ 	TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`&>> ${SCRIPT_LOGFILE}
 
 
 #### Install TOR ###
@@ -62,6 +64,7 @@
 
 
 echo "The TOR address of your masternode is: $TORHOSTNAME"
+echo "The Logfile is stored here: $SCRIPT_LOGFILE"
 
 
 echo "All done!"
