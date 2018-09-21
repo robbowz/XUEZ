@@ -1,5 +1,4 @@
-#/bin/bash
-#Edited by Robbowz - 2018
+#!/bin/bash
 
 DATE_STAMP=$(date +%y-%m-%d-%s)
 WANIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
