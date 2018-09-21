@@ -105,14 +105,12 @@ EOL
   /etc/init.d/tor start
   echo "Starting TOR, please wait..."
   sleep 5 # Give tor enough time to connect before we continue
-fi
+
 
 # Set TORHOSTNAME if it exists.
 if [[ -f /var/lib/tor/hidden_service/hostname ]]; then
   TORHOSTNAME=`cat /var/lib/tor/hidden_service/hostname`
 fi
-
-
 	
 
 function install_packages() {
