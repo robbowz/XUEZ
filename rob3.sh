@@ -77,17 +77,13 @@ echo ""
 	sudo su -c "echo 'LongLivedPorts 9033' >> /etc/tor/torrc"
 	sudo su -c "echo 'HiddenServiceDir /etc/tor/hidden_service/"
 	sudo systemctl restart tor.service
-	sleep 10
-	if [[ -f /etc/tor/hidden_service/hostname ]]; then
- 	TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`
-	fi
 }
 
 
 function install_packages() {
 	cd ~
 	echo "Install packages..."
-  sudo apt-get -y upgrade 
+   	sudo apt-get -y upgrade 
 	sudo apt-get -y dist-upgrade 
 	sudo apt-get install -y ufw 
 	sudo add-apt-repository -yu ppa:bitcoin/bitcoin  
@@ -102,17 +98,17 @@ function install_packages() {
 
 
 function install_firewall() {
-  echo "Installing Firewall..."
+  	echo "Installing Firewall..."
 	sudo ufw allow ssh/tcp 
 	sudo ufw limit ssh/tcp 
 	sudo ufw logging on 
 	sudo ufw allow 22 
 	sudo ufw allow 41798 
-  sudo ufw allow 9051 
-  sudo ufw allow 9033 
+  	sudo ufw allow 9051 
+  	sudo ufw allow 9033 
 	echo "y" | sudo ufw enable
 	sudo ufw status
-    echo "Firewall done..."
+    	echo "Firewall done..."
 }
 
 
@@ -147,14 +143,14 @@ sudo hostname -I
 	echo "We are using your default IP address"
 	echo "Enter masternode private key for node, followed by [ENTER]: $ALIAS"
 	read PRIVKEY
-  conffile=/root/.xuez/xuez.conf
+  	conffile=/root/.xuez/xuez.conf
 	IP=$(hostname -I)
-  cd ~/
-  echo "Starting daemon..."
+  	cd ~/
+  	echo "Starting daemon..."
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez
 	sleep 20
  	TORHOSTNAME=`cat /root/xuez/onion_private_key`
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
 	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
   echo -e "" >> ${conffile} 
   echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
