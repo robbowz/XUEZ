@@ -146,12 +146,14 @@ sudo hostname -I
   	conffile=/root/.xuez/xuez.conf
 	IP=$(hostname -I)
   	cd ~/
+	echo "Creating RPC credentials..."
+  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	sleep 1
   	echo "Starting daemon..."
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez
 	sleep 20
  	TORHOSTNAME=`cat /root/xuez/onion_private_key`
-  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
   echo -e "" >> ${conffile} 
   echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
   sleep 1
@@ -207,12 +209,14 @@ sudo hostname -I
   conffile2=/root/.xuez2/xuez2.conf 
 	IP=$(hostname -I) 
   cd ~/
+  	echo "Creating RPC credentials..."
+	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
+	sleep 1
   echo "Starting daemon..."
 	/root/xuez2/xuezd2 -daemon -datadir=/root/.xuez2
 	sleep 20
  	TORHOSTNAME2=`cat /root/xuez2/onion_private_key`
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile2} 
   echo -e "" >> ${conffile2} 
   echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME2:$PORT\nmasternodeprivkey=$PRIVKEY2"  >> ${conffile2}
   sleep 1
@@ -268,12 +272,14 @@ sudo hostname -I
   conffile3=/root/.xuez3/xuez3.conf 
 	IP=$(hostname -I) 
   cd ~/
-  echo "Starting daemon..."
+  	echo "Creating RPC credentials..."
+  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3} 
+	sleep 1
+  	echo "Starting daemon..."
 	/root/xuez3/xuezd3 -daemon -datadir=/root/.xuez3
 	sleep 20
  	TORHOSTNAME3=`cat /root/xuez3/onion_private_key`
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile3} 
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile3} 
   echo -e "" >> ${conffile3} 
   echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME3:$PORT\nmasternodeprivkey=$PRIVKEY3"  >> ${conffile3}
   sleep 1
@@ -329,12 +335,14 @@ sudo hostname -I
   conffile4=/root/.xuez4/xuez4.conf 
 	IP=$(hostname -I) 
   cd ~/
-  echo "Starting daemon..."
+  	echo "Creating RPC credentials..."
+  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile4} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile4} 
+	sleep 1
+  	echo "Starting daemon..."
 	/root/xuez4/xuezd4 -daemon -datadir=/root/.xuez4
 	sleep 20
  	TORHOSTNAME4=`cat /root/xuez4/onion_private_key`
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile4} 
-	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile4} 
   echo -e "" >> ${conffile4} 
   echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME4:$PORT\nmasternodeprivkey=$PRIVKEY4"  >> ${conffile4}
   sleep 1
