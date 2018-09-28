@@ -152,15 +152,21 @@ sudo hostname -I
 	sleep 1
   	echo "Starting daemon..."
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez
-	sleep 20
+  	echo -e "" >> ${conffile} 
+  	echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$WANIP:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
+  	sleep 5
+  	cd ~/
  	TORHOSTNAME=`cat /root/xuez/onion_private_key`
-  echo -e "" >> ${conffile} 
-  echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
-  sleep 1
-  cd ~/
-  echo "Restarting wallet..."
-  sudo killall xuezd
-  sleep 5
+  	echo "Restarting wallet..."
+  	sudo killall xuezd
+  	sleep 5
+	sudo rm /root/.xuez/xuez.conf
+	echo "creating ONION address..."
+  	echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	echo "rpcpassword=passw"`shuf -i 100000-10000000 -n 1` >> ${conffile} 
+	echo -e "" >> ${conffile} 
+  	echo -e "rpcallowip=127.0.0.1\nrpcport=41799\nlisten=1\nlistenonion=1\nserver=1\ndaemon=1\nlogtimestamps=1\nmaxconnections=256\nmasternode=1\nport=$PORT\nmasternodeaddr=$TORHOSTNAME:$PORT\nmasternodeprivkey=$PRIVKEY"  >> ${conffile}
+  	sleep 5
 	/root/xuez/xuezd -daemon -datadir=/root/.xuez 
 	sleep 20
 	echo "if server start failure try /root/xuez/xuezd -reindex"
