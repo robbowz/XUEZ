@@ -22,9 +22,10 @@ SCRIPT_LOGFILE="/tmp/tor.log"
 # Install TOR
 echo "Installing TOR..."
 apt-get -qq install tor
-cat >> /etc/tor/torrc << EOL
+mk ./etc/tor/torrc
+cat >> ./etc/tor/torrc
 ### CONFIGURATION ###
-HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServiceDir ./var/lib/tor/hidden_service/
 ClientOnly 1
 ControlPort 9051
 NumEntryGuards 4
@@ -36,16 +37,15 @@ HiddenServiceDir /var/lib/tor/hidden_service/
 HiddenServicePort 9033 127.0.0.1:9033
 HiddenServicePort 80 127.0.0.1:80
 LongLivedPorts 80,9033
-EOL
-  /etc/init.d/tor stop
-  sudo rm -R /var/lib/tor/hidden_service 2>/dev/null
-  /etc/init.d/tor start
+sleep 2
+  ./etc/init.d/tor stop
+  sudo rm -R ./var/lib/tor/hidden_service 2>/dev/null
+  ./etc/init.d/tor start
   echo "Starting TOR, please wait..."
-  sleep 10 # Give tor enough time to connect before we continue
-fi
+sleep 10 # Give tor enough time to connect before we continue
 
 # Set TORHOSTNAME
-TORHOSTNAME=`cat /var/lib/tor/hidden_service//hostname`
+TORHOSTNAME=`cat ./var/lib/tor/hidden_service//hostname`
 
 
 echo "The TOR address of your masternode is: $TORHOSTNAME"
