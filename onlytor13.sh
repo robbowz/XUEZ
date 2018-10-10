@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TORFILE=torrc
 SCRIPT_LOGFILE="/tmp/tor.log"
 
 # TOR INSTALLATION 1
@@ -25,18 +26,7 @@ apt-get -qq install tor
 mk ./etc/tor/torrc
 cat >> ./etc/tor/torrc
 ### CONFIGURATION ###
-HiddenServiceDir ./var/lib/tor/hidden_service/
-ClientOnly 1
-ControlPort 9051
-NumEntryGuards 4
-NumDirectoryGuards 3
-GuardLifetime 2764800
-GeoIPExcludeUnknown 1
-CookieAuthFileGroupReadable 1
-HiddenServiceDir /var/lib/tor/hidden_service/
-HiddenServicePort 9033 127.0.0.1:9033
-HiddenServicePort 80 127.0.0.1:80
-LongLivedPorts 80,9033
+echo -e "HiddenServiceDir ./var/lib/tor/hidden_service/\nClientOnly 1\nControlPort 9051\nNumEntryGuards 4\nNumDirectoryGuards 3\nGuardLifetime 2764800\nGeoIPExcludeUnknown 1\nCookieAuthFileGroupReadable 1\nHiddenServiceDir /var/lib/tor/hidden_service/\nHiddenServicePort 9033 127.0.0.1:9033\nHiddenServicePort 80 127.0.0.1:80\nLongLivedPorts 80,9033" >> ${torfile}
 sleep 2
   ./etc/init.d/tor stop
   sudo rm -R ./var/lib/tor/hidden_service 2>/dev/null
