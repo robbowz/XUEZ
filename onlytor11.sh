@@ -19,53 +19,37 @@ SCRIPT_LOGFILE="/tmp/tor.log"
 #sleep 5
 #TORHOSTNAME=`cat /etc/tor/hidden_service/hostname`&>> ${SCRIPT_LOGFILE}
 
-
-# TOR INSTALLATION 2
+# Install TOR
 echo "Installing TOR..."
 apt-get -qq install tor
 cat >> /etc/tor/torrc << EOL
-### XUEZ CONFIGURATION ###
-HiddenServiceDir /etc/tor/torrc/hidden_service/
+### CONFIGURATION ###
+HiddenServiceDir /var/lib/tor/hidden_service/
 ClientOnly 1
 ControlPort 9051
 NumEntryGuards 4
 NumDirectoryGuards 3
 GuardLifetime 2764800
 GeoIPExcludeUnknown 1
-HiddenServiceDir /etc/tor/torrc/hidden_service/
-HiddenServicePort 9033 127.0.0.1:52543
+CookieAuthFileGroupReadable 1
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 9033 127.0.0.1:9033
 HiddenServicePort 80 127.0.0.1:80
 LongLivedPorts 80,9033
 EOL
   /etc/init.d/tor stop
-  sudo rm -R /etc/tor/torrc/hidden_service 2>/dev/null
+  sudo rm -R /var/lib/tor/hidden_service 2>/dev/null
   /etc/init.d/tor start
   echo "Starting TOR, please wait..."
-  sleep 5 # Give tor enough time to connect before we continue
-
+  sleep 10 # Give tor enough time to connect before we continue
+fi
 
 # Set TORHOSTNAME
-TORHOSTNAME=`cat /etc/tor/torrc/hidden_service/hostname`
-	
-
-# Already installed:
-#	cd ~
-#	echo "Install packages..."
-#    sudo apt-get -y upgrade 
-#	sudo apt-get -y dist-upgrade 
-#	sudo apt-get install -y ufw 
-#	sudo add-apt-repository -yu ppa:bitcoin/bitcoin  
-#	sudo apt-get -y update 
-#	sudo apt-get -y install libzmq3-dev 
-#	sudo apt-get -y install wget make automake autoconf build-essential libtool autotools-dev \
-#	sudo git nano python-virtualenv pwgen virtualenv \
-#	pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common \
-#	libboost-all-dev libminiupnpc-dev libdb4.8-dev libdb4.8++-dev 
-#	echo "Install done..."
+TORHOSTNAME=`cat /var/lib/tor/hidden_service//hostname`
 
 
 echo "The TOR address of your masternode is: $TORHOSTNAME"
-echo "The Logfile is stored here: $SCRIPT_LOGFILE"
+#echo "The Logfile is stored here: $SCRIPT_LOGFILE"
 
 
 echo "All done!"
